@@ -1,0 +1,58 @@
+﻿@model IEnumerable<FootballLeague.fixture>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 style="font-family:'Segou UI Light';text-align:center;"><b style="font-weight:bolder;">Fixture</b></h1>
+
+<p style="font-size:16px; font-weight:bolder;">
+    @Html.ActionLink("Add New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.teamA)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.teamB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.score)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.league.league_name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.teamA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.teamB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.score)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.league.league_name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.fixture_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.fixture_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.fixture_id })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,58 @@
+﻿@model FootballLeague.fixture
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>fixture</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.teamA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.teamA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.teamB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.teamB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.score)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.score)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.league.league_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.league.league_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.fixture_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

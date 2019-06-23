@@ -1,0 +1,58 @@
+﻿@model FootballLeague.player
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>player</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.player_fullname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.player_fullname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dob)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dob)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.position)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.position)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nationality)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nationality)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.team.team_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.team.team_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.player_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

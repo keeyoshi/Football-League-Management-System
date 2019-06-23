@@ -1,0 +1,689 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="leagueModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="fixture">
+          <Key>
+            <PropertyRef Name="fixture_id" />
+          </Key>
+          <Property Name="fixture_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="location" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="teamA" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="teamB" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="score" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="league_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="league">
+          <Key>
+            <PropertyRef Name="league_id" />
+          </Key>
+          <Property Name="league_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="league_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="league_type" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="start_date" Type="date" Nullable="false" />
+          <Property Name="end_date" Type="date" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'league.dbo.league_team' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="league_team">
+          <Key>
+            <PropertyRef Name="league_id" />
+            <PropertyRef Name="team_id" />
+            <PropertyRef Name="match_played" />
+            <PropertyRef Name="win" />
+            <PropertyRef Name="loss" />
+            <PropertyRef Name="ties" />
+            <PropertyRef Name="points" />
+          </Key>
+          <Property Name="league_id" Type="int" Nullable="false" />
+          <Property Name="team_id" Type="int" Nullable="false" />
+          <Property Name="match_played" Type="int" Nullable="false" />
+          <Property Name="win" Type="int" Nullable="false" />
+          <Property Name="loss" Type="int" Nullable="false" />
+          <Property Name="ties" Type="int" Nullable="false" />
+          <Property Name="points" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="player">
+          <Key>
+            <PropertyRef Name="player_id" />
+          </Key>
+          <Property Name="player_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="player_fullname" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="dob" Type="date" Nullable="false" />
+          <Property Name="position" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="nationality" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="team_id" Type="int" />
+        </EntityType>
+        <EntityType Name="player_record">
+          <Key>
+            <PropertyRef Name="record_id" />
+          </Key>
+          <Property Name="record_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="player_id" Type="int" Nullable="false" />
+          <Property Name="goal_scored" Type="int" Nullable="false" />
+          <Property Name="goal_assist" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="roles">
+          <Key>
+            <PropertyRef Name="r_id" />
+          </Key>
+          <Property Name="r_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="r_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="r_status" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_news">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Content" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Images" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="team">
+          <Key>
+            <PropertyRef Name="team_id" />
+          </Key>
+          <Property Name="team_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="team_name" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="short_name" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="location" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="owner_name" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ground_name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="league_id" Type="int" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="user_fullname" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="location" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="gender" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="favorite_league" Type="int" Nullable="false" />
+          <Property Name="u_status" Type="int" Nullable="false" />
+          <Property Name="u_roleID" Type="int" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="favorite_league">
+          <End Role="league" Type="Self.league" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="league">
+              <PropertyRef Name="league_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="favorite_league" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fixture__league___15502E78">
+          <End Role="league" Type="Self.league" Multiplicity="1" />
+          <End Role="fixture" Type="Self.fixture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="league">
+              <PropertyRef Name="league_id" />
+            </Principal>
+            <Dependent Role="fixture">
+              <PropertyRef Name="league_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__league_te__leagu__1CF15040">
+          <End Role="league" Type="Self.league" Multiplicity="1" />
+          <End Role="league_team" Type="Self.league_team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="league">
+              <PropertyRef Name="league_id" />
+            </Principal>
+            <Dependent Role="league_team">
+              <PropertyRef Name="league_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__league_te__team___1DE57479">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="league_team" Type="Self.league_team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="team_id" />
+            </Principal>
+            <Dependent Role="league_team">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__player__team_id__20C1E124">
+          <End Role="team" Type="Self.team" Multiplicity="0..1" />
+          <End Role="player" Type="Self.player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="team_id" />
+            </Principal>
+            <Dependent Role="player">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__player_re__playe__239E4DCF">
+          <End Role="player" Type="Self.player" Multiplicity="1" />
+          <End Role="player_record" Type="Self.player_record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="player">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="player_record">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__team__league_id__1B0907CE">
+          <End Role="league" Type="Self.league" Multiplicity="0..1" />
+          <End Role="team" Type="Self.team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="league">
+              <PropertyRef Name="league_id" />
+            </Principal>
+            <Dependent Role="team">
+              <PropertyRef Name="league_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__u_roleID__300424B4">
+          <End Role="roles" Type="Self.roles" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="r_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="u_roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="st_getLoginDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="varchar" Mode="In" />
+          <Parameter Name="pass" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="st_gettRolesWRTuser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="user" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="leagueModelStoreContainer">
+          <EntitySet Name="fixture" EntityType="Self.fixture" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="league" EntityType="Self.league" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="player" EntityType="Self.player" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="player_record" EntityType="Self.player_record" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="roles" EntityType="Self.roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_news" EntityType="Self.tbl_news" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="team" EntityType="Self.team" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="league_team" EntityType="Self.league_team" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [league_team].[league_id] AS [league_id], 
+    [league_team].[team_id] AS [team_id], 
+    [league_team].[match_played] AS [match_played], 
+    [league_team].[win] AS [win], 
+    [league_team].[loss] AS [loss], 
+    [league_team].[ties] AS [ties], 
+    [league_team].[points] AS [points]
+    FROM [dbo].[league_team] AS [league_team]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="favorite_league" Association="Self.favorite_league">
+            <End Role="league" EntitySet="league" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fixture__league___15502E78" Association="Self.FK__fixture__league___15502E78">
+            <End Role="league" EntitySet="league" />
+            <End Role="fixture" EntitySet="fixture" />
+          </AssociationSet>
+          <AssociationSet Name="FK__league_te__leagu__1CF15040" Association="Self.FK__league_te__leagu__1CF15040">
+            <End Role="league" EntitySet="league" />
+            <End Role="league_team" EntitySet="league_team" />
+          </AssociationSet>
+          <AssociationSet Name="FK__league_te__team___1DE57479" Association="Self.FK__league_te__team___1DE57479">
+            <End Role="team" EntitySet="team" />
+            <End Role="league_team" EntitySet="league_team" />
+          </AssociationSet>
+          <AssociationSet Name="FK__player__team_id__20C1E124" Association="Self.FK__player__team_id__20C1E124">
+            <End Role="team" EntitySet="team" />
+            <End Role="player" EntitySet="player" />
+          </AssociationSet>
+          <AssociationSet Name="FK__player_re__playe__239E4DCF" Association="Self.FK__player_re__playe__239E4DCF">
+            <End Role="player" EntitySet="player" />
+            <End Role="player_record" EntitySet="player_record" />
+          </AssociationSet>
+          <AssociationSet Name="FK__team__league_id__1B0907CE" Association="Self.FK__team__league_id__1B0907CE">
+            <End Role="league" EntitySet="league" />
+            <End Role="team" EntitySet="team" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__u_roleID__300424B4" Association="Self.FK__users__u_roleID__300424B4">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="leagueModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="fixture">
+          <Key>
+            <PropertyRef Name="fixture_id" />
+          </Key>
+          <Property Name="fixture_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="location" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="teamA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="teamB" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="score" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="league_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="league" Relationship="Self.FK__fixture__league___15502E78" FromRole="fixture" ToRole="league" />
+        </EntityType>
+        <EntityType Name="league">
+          <Key>
+            <PropertyRef Name="league_id" />
+          </Key>
+          <Property Name="league_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="league_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="league_type" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="start_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="end_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="fixtures" Relationship="Self.FK__fixture__league___15502E78" FromRole="league" ToRole="fixture" />
+          <NavigationProperty Name="league_team" Relationship="Self.FK__league_te__leagu__1CF15040" FromRole="league" ToRole="league_team" />
+          <NavigationProperty Name="teams" Relationship="Self.FK__team__league_id__1B0907CE" FromRole="league" ToRole="team" />
+          <NavigationProperty Name="users" Relationship="leagueModel.favorite_league" FromRole="league" ToRole="user" />
+        </EntityType>
+        <EntityType Name="player">
+          <Key>
+            <PropertyRef Name="player_id" />
+          </Key>
+          <Property Name="player_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="player_fullname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dob" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="position" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nationality" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="team_id" Type="Int32" />
+          <NavigationProperty Name="team" Relationship="Self.FK__player__team_id__20C1E124" FromRole="player" ToRole="team" />
+          <NavigationProperty Name="player_record" Relationship="Self.FK__player_re__playe__239E4DCF" FromRole="player" ToRole="player_record" />
+        </EntityType>
+        <EntityType Name="player_record">
+          <Key>
+            <PropertyRef Name="record_id" />
+          </Key>
+          <Property Name="record_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="player_id" Type="Int32" Nullable="false" />
+          <Property Name="goal_scored" Type="Int32" Nullable="false" />
+          <Property Name="goal_assist" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="player" Relationship="Self.FK__player_re__playe__239E4DCF" FromRole="player_record" ToRole="player" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="r_id" />
+          </Key>
+          <Property Name="r_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="r_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="r_status" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK__users__u_roleID__300424B4" FromRole="roles" ToRole="users" />
+        </EntityType>
+        <EntityType Name="tbl_news">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Content" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Images" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="team">
+          <Key>
+            <PropertyRef Name="team_id" />
+          </Key>
+          <Property Name="team_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="team_name" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="short_name" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="owner_name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ground_name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="league_id" Type="Int32" />
+          <NavigationProperty Name="league" Relationship="Self.FK__team__league_id__1B0907CE" FromRole="team" ToRole="league" />
+          <NavigationProperty Name="players" Relationship="Self.FK__player__team_id__20C1E124" FromRole="team" ToRole="player" />
+          <NavigationProperty Name="league_team" Relationship="Self.FK__league_te__team___1DE57479" FromRole="team" ToRole="league_team" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="user_fullname" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="location" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="favorite_league" Type="Int32" Nullable="false" />
+          <Property Name="u_status" Type="Int32" Nullable="false" />
+          <Property Name="u_roleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="role" Relationship="Self.FK__users__u_roleID__300424B4" FromRole="users" ToRole="roles" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="league" Relationship="leagueModel.favorite_league" FromRole="user" ToRole="league" />
+        </EntityType>
+        <EntityType Name="league_team">
+          <Key>
+            <PropertyRef Name="league_id" />
+            <PropertyRef Name="team_id" />
+            <PropertyRef Name="match_played" />
+            <PropertyRef Name="win" />
+            <PropertyRef Name="loss" />
+            <PropertyRef Name="ties" />
+            <PropertyRef Name="points" />
+          </Key>
+          <Property Name="league_id" Type="Int32" Nullable="false" />
+          <Property Name="team_id" Type="Int32" Nullable="false" />
+          <Property Name="match_played" Type="Int32" Nullable="false" />
+          <Property Name="win" Type="Int32" Nullable="false" />
+          <Property Name="loss" Type="Int32" Nullable="false" />
+          <Property Name="ties" Type="Int32" Nullable="false" />
+          <Property Name="points" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="league" Relationship="Self.FK__league_te__leagu__1CF15040" FromRole="league_team" ToRole="league" />
+          <NavigationProperty Name="team" Relationship="Self.FK__league_te__team___1DE57479" FromRole="league_team" ToRole="team" />
+        </EntityType>
+        <Association Name="FK__fixture__league___15502E78">
+          <End Role="league" Type="Self.league" Multiplicity="1" />
+          <End Role="fixture" Type="Self.fixture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="league">
+              <PropertyRef Name="league_id" />
+            </Principal>
+            <Dependent Role="fixture">
+              <PropertyRef Name="league_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__league_te__leagu__1CF15040">
+          <End Role="league" Type="Self.league" Multiplicity="1" />
+          <End Role="league_team" Type="Self.league_team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="league">
+              <PropertyRef Name="league_id" />
+            </Principal>
+            <Dependent Role="league_team">
+              <PropertyRef Name="league_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__team__league_id__1B0907CE">
+          <End Role="league" Type="Self.league" Multiplicity="0..1" />
+          <End Role="team" Type="Self.team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="league">
+              <PropertyRef Name="league_id" />
+            </Principal>
+            <Dependent Role="team">
+              <PropertyRef Name="league_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__player__team_id__20C1E124">
+          <End Role="team" Type="Self.team" Multiplicity="0..1" />
+          <End Role="player" Type="Self.player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="team_id" />
+            </Principal>
+            <Dependent Role="player">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__player_re__playe__239E4DCF">
+          <End Role="player" Type="Self.player" Multiplicity="1" />
+          <End Role="player_record" Type="Self.player_record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="player">
+              <PropertyRef Name="player_id" />
+            </Principal>
+            <Dependent Role="player_record">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__users__u_roleID__300424B4">
+          <End Role="roles" Type="Self.role" Multiplicity="1" />
+          <End Role="users" Type="Self.user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="roles">
+              <PropertyRef Name="r_id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="u_roleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__league_te__team___1DE57479">
+          <End Role="team" Type="Self.team" Multiplicity="1" />
+          <End Role="league_team" Type="Self.league_team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="team">
+              <PropertyRef Name="team_id" />
+            </Principal>
+            <Dependent Role="league_team">
+              <PropertyRef Name="team_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBConnection" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="fixtures" EntityType="Self.fixture" />
+          <EntitySet Name="leagues" EntityType="Self.league" />
+          <EntitySet Name="players" EntityType="Self.player" />
+          <EntitySet Name="player_record" EntityType="Self.player_record" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="tbl_news" EntityType="Self.tbl_news" />
+          <EntitySet Name="teams" EntityType="Self.team" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="league_team" EntityType="Self.league_team" />
+          <AssociationSet Name="FK__fixture__league___15502E78" Association="Self.FK__fixture__league___15502E78">
+            <End Role="league" EntitySet="leagues" />
+            <End Role="fixture" EntitySet="fixtures" />
+          </AssociationSet>
+          <AssociationSet Name="FK__league_te__leagu__1CF15040" Association="Self.FK__league_te__leagu__1CF15040">
+            <End Role="league" EntitySet="leagues" />
+            <End Role="league_team" EntitySet="league_team" />
+          </AssociationSet>
+          <AssociationSet Name="FK__team__league_id__1B0907CE" Association="Self.FK__team__league_id__1B0907CE">
+            <End Role="league" EntitySet="leagues" />
+            <End Role="team" EntitySet="teams" />
+          </AssociationSet>
+          <AssociationSet Name="FK__player__team_id__20C1E124" Association="Self.FK__player__team_id__20C1E124">
+            <End Role="team" EntitySet="teams" />
+            <End Role="player" EntitySet="players" />
+          </AssociationSet>
+          <AssociationSet Name="FK__player_re__playe__239E4DCF" Association="Self.FK__player_re__playe__239E4DCF">
+            <End Role="player" EntitySet="players" />
+            <End Role="player_record" EntitySet="player_record" />
+          </AssociationSet>
+          <AssociationSet Name="FK__users__u_roleID__300424B4" Association="Self.FK__users__u_roleID__300424B4">
+            <End Role="roles" EntitySet="roles" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__league_te__team___1DE57479" Association="Self.FK__league_te__team___1DE57479">
+            <End Role="team" EntitySet="teams" />
+            <End Role="league_team" EntitySet="league_team" />
+          </AssociationSet>
+          <AssociationSet Name="favorite_league" Association="leagueModel.favorite_league">
+            <End Role="league" EntitySet="leagues" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
+          <FunctionImport Name="st_getLoginDetails" ReturnType="Collection(leagueModel.st_getLoginDetails_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="pass" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="st_getRolesWRTuser" ReturnType="Collection(Int32)">
+          <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="st_gettRolesWRTuser" ReturnType="Collection(String)">
+            <Parameter Name="user" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <Association Name="favorite_league">
+          <End Type="leagueModel.league" Role="league" Multiplicity="1" />
+          <End Type="leagueModel.user" Role="user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="league">
+              <PropertyRef Name="league_id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="favorite_league" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="st_getLoginDetails_Result">
+          <Property Type="String" Name="username" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="20" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="leagueModelStoreContainer" CdmEntityContainer="DBConnection">
+          <EntitySetMapping Name="fixtures">
+            <EntityTypeMapping TypeName="leagueModel.fixture">
+              <MappingFragment StoreEntitySet="fixture">
+                <ScalarProperty Name="fixture_id" ColumnName="fixture_id" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="teamA" ColumnName="teamA" />
+                <ScalarProperty Name="teamB" ColumnName="teamB" />
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="league_id" ColumnName="league_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="leagues">
+            <EntityTypeMapping TypeName="leagueModel.league">
+              <MappingFragment StoreEntitySet="league">
+                <ScalarProperty Name="league_id" ColumnName="league_id" />
+                <ScalarProperty Name="league_name" ColumnName="league_name" />
+                <ScalarProperty Name="league_type" ColumnName="league_type" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="players">
+            <EntityTypeMapping TypeName="leagueModel.player">
+              <MappingFragment StoreEntitySet="player">
+                <ScalarProperty Name="player_id" ColumnName="player_id" />
+                <ScalarProperty Name="player_fullname" ColumnName="player_fullname" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="nationality" ColumnName="nationality" />
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="player_record">
+            <EntityTypeMapping TypeName="leagueModel.player_record">
+              <MappingFragment StoreEntitySet="player_record">
+                <ScalarProperty Name="record_id" ColumnName="record_id" />
+                <ScalarProperty Name="player_id" ColumnName="player_id" />
+                <ScalarProperty Name="goal_scored" ColumnName="goal_scored" />
+                <ScalarProperty Name="goal_assist" ColumnName="goal_assist" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="leagueModel.role">
+              <MappingFragment StoreEntitySet="roles">
+                <ScalarProperty Name="r_id" ColumnName="r_id" />
+                <ScalarProperty Name="r_name" ColumnName="r_name" />
+                <ScalarProperty Name="r_status" ColumnName="r_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_news">
+            <EntityTypeMapping TypeName="leagueModel.tbl_news">
+              <MappingFragment StoreEntitySet="tbl_news">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teams">
+            <EntityTypeMapping TypeName="leagueModel.team">
+              <MappingFragment StoreEntitySet="team">
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+                <ScalarProperty Name="team_name" ColumnName="team_name" />
+                <ScalarProperty Name="short_name" ColumnName="short_name" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="owner_name" ColumnName="owner_name" />
+                <ScalarProperty Name="ground_name" ColumnName="ground_name" />
+                <ScalarProperty Name="league_id" ColumnName="league_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="leagueModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_fullname" ColumnName="user_fullname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="favorite_league" ColumnName="favorite_league" />
+                <ScalarProperty Name="u_status" ColumnName="u_status" />
+                <ScalarProperty Name="u_roleID" ColumnName="u_roleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="league_team">
+            <EntityTypeMapping TypeName="leagueModel.league_team">
+              <MappingFragment StoreEntitySet="league_team">
+                <ScalarProperty Name="league_id" ColumnName="league_id" />
+                <ScalarProperty Name="team_id" ColumnName="team_id" />
+                <ScalarProperty Name="match_played" ColumnName="match_played" />
+                <ScalarProperty Name="win" ColumnName="win" />
+                <ScalarProperty Name="loss" ColumnName="loss" />
+                <ScalarProperty Name="ties" ColumnName="ties" />
+                <ScalarProperty Name="points" ColumnName="points" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="st_getLoginDetails" FunctionName="leagueModel.Store.st_getLoginDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="leagueModel.st_getLoginDetails_Result">
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="st_gettRolesWRTuser" FunctionName="leagueModel.Store.st_gettRolesWRTuser" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

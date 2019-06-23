@@ -1,0 +1,70 @@
+﻿@model IEnumerable<FootballLeague.league_team>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>League Team Stats</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.league.league_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.team.team_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.match_played)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.win)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.loss)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ties)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.points)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.league.league_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.team.team_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.match_played)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.win)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.loss)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ties)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.points)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+         
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

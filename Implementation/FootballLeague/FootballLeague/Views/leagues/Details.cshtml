@@ -1,0 +1,50 @@
+﻿@model FootballLeague.league
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>league</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.league_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.league_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.league_type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.league_type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.start_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.start_date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.end_date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.end_date)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.league_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

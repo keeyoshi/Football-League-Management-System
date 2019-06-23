@@ -1,0 +1,110 @@
+﻿@model FootballLeague.user
+
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <h1 style="font-family:'Segou UI Light';text-align:center;">User Management</h1>
+        <hr />
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.user_fullname,"Full Name", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.user_fullname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.user_fullname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.username, "Username", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.email,"Emai", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.location,"Location", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.location, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.location, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.password, htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.gender,"Gender", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-5">
+                    @Html.EditorFor(model => model.gender, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.gender, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.favorite_league, "Favorite League", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-5">
+                    @Html.DropDownList("favorite_league", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.favorite_league, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.u_status, "User Status", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-5">
+                    @Html.DropDownListFor(model => model.u_status, ViewBag.abc as SelectList, htmlAttributes: new { @class = "form-control " })
+                    @Html.ValidationMessageFor(model => model.u_status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.u_roleID, "Roll ID", htmlAttributes: new { @class = "control-label col-md-5" })
+                <div class="col-md-5">
+                    @Html.DropDownList("u_roleID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.u_roleID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-5 col-md-5">
+                    <input type="submit" value="Create " class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="back">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    </body>
+</html>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

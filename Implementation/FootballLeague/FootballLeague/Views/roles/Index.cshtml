@@ -1,0 +1,44 @@
+﻿@model IEnumerable<FootballLeague.role>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.r_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.r_status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.r_name)
+        </td>
+        <td>
+            @{ 
+                if (item.r_status == Convert.ToByte(1))
+                {<p>Active</p>}
+                else if (item.r_status == Convert.ToByte(0))
+                {<p> In-active </p>}
+            }
+           
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.r_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.r_id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,45 @@
+﻿*{
+    font-family:'Segoe UI Light';
+}
+
+body {
+    background-color:#808080;
+    padding-top: 50px;
+    font-family:Arial;
+    padding-bottom: 20px;
+    text-align:justify;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin:5%;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.abc{
+    font-family:Arial;
+}
+
+.back{
+    font-size:20px;
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}

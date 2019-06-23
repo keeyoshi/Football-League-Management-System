@@ -1,0 +1,19 @@
+﻿@model FootballLeague.user
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<h3 style="margin-top:20%; margin-left:10%;">Are you sure you want to delete @Html.DisplayFor(model => model.user_fullname) ?</h3>
+<div>
+    
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

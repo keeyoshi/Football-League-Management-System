@@ -1,0 +1,48 @@
+﻿@model FootballLeague.player_record
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>player_record</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.goal_scored)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.goal_scored)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.goal_assist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.goal_assist)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.player.player_fullname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.player.player_fullname)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

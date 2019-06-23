@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Football League Management System</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <strong>@Html.ActionLink(" Football League", "Index", "users", new { area = "" }, new { @class = "navbar-brand" })</strong>
+            </div>
+            <div class="navbar-collapse collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    @Html.ActionLink("League", "Index", "leagues", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Team", "Index", "teams", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink(" Player", "Index", "players", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink(" Fixture ", "Index", "fixtures", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Role", "Index", "roles", new { area = "" }, new { @class = "navbar-brand" })
+                    <b style="float:right;,margin-left:5px;">
+                        @Html.ActionLink("LOGOUT", "Logout", "Auth", new { area = "" }, new { @class = "navbar-brand" })
+                    </b>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="img" style="font-family:Arial;">
+            <h1>Football League Managenment System</h1>
+            <img src="~/fonts/football.jpg" height="100%" width="100%" />
+            <p><h2><b>News And Updates</b></h2></p>
+            <p><h4>Liverpool are the Champion League Winner</h4></p>
+            <img src="~/fonts/liverpool.jpg" height="75%" width="75%" /><p></p><br />
+            <b>
+                <p>
+                    Liverpool are the 2018-2019 Champion league winner. As Liverpool won to their rival Spurs. Liverpool won by 2 goal as spurs was unable <br />
+                    to score any goal. By wining the champion league Liverpool has now won 6 champion league titles.
+                </p>
+
+            </b><hr />
+
+            <p><h4>Portugal UEFA Nations League champion </h4></p>
+            <img src="~/fonts/portugal.jpg" height="75%" width="75%" /><p></p><br />
+            <b>
+                <p>
+                    Portugal has done it once again. Beating Netherlands by 1 to 0 portugal are the first nations league winner. With Cristiano Ronaldo becoming <br />
+                    winning best player of the league. By wining Nations league portugal has qualified for the Euro 2020.
+                  
+                </p>
+
+            </b><hr />
+        </div>
+
+    </div>
+    
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
+</html>
+<!-- Page Content -->

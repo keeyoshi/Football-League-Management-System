@@ -1,0 +1,70 @@
+﻿@model IEnumerable<FootballLeague.team>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Team</h2>
+
+<p>
+    <div class="col-sm">
+        <div class="col-sm">
+            @Html.ActionLink("Add New", "Create")
+        </div>
+        <div class="col-sm">
+            @Html.ActionLink("View League_Team", "Index","League_Team")
+            </div>
+        </div>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.team_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.short_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.owner_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ground_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.league.league_name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.team_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.short_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.owner_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ground_name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.league.league_name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.team_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.team_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.team_id })
+        </td>
+    </tr>
+}
+
+</table>

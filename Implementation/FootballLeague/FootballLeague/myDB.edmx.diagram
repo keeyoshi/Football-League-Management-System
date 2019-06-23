@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="295f66fa4b1943b18c39d5e7f0da4c3a" Name="Diagram1">
+        <EntityTypeShape EntityType="leagueModel.fixture" Width="1.5" PointX="0.875" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="leagueModel.league" Width="1.5" PointX="0.875" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="leagueModel.player" Width="1.5" PointX="8.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="leagueModel.player_record" Width="1.5" PointX="10.25" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="leagueModel.role" Width="1.5" PointX="3.375" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="leagueModel.tbl_news" Width="1.5" PointX="9.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="leagueModel.team" Width="1.5" PointX="4.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="leagueModel.user" Width="1.5" PointX="0.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="leagueModel.league_team" Width="1.5" PointX="5.875" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="leagueModel.FK__fixture__league___15502E78" ManuallyRouted="false" />
+        <AssociationConnector Association="leagueModel.FK__league_te__leagu__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="leagueModel.FK__team__league_id__1B0907CE" ManuallyRouted="false" />
+        <AssociationConnector Association="leagueModel.FK__player__team_id__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="leagueModel.FK__player_re__playe__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="leagueModel.FK__users__u_roleID__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="leagueModel.FK__league_te__team___1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="leagueModel.favorite_league" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

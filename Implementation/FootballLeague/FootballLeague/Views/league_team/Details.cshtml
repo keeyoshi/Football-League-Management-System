@@ -1,0 +1,35 @@
+﻿@model FootballLeague.league_team
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>league_team</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.league.league_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.league.league_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.team.team_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.team.team_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

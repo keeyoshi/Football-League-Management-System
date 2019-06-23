@@ -1,0 +1,42 @@
+﻿@model FootballLeague.player_record
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>player_record</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.goal_scored)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.goal_scored)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.goal_assist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.goal_assist)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.player.player_fullname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.player.player_fullname)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.record_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
